@@ -1,0 +1,15 @@
+Options -MultiViews
+RewriteEngine On
+RewriteBase /
+
+# Kalau file atau folder fisik memang ada (termasuk .html), tampilkan langsung
+RewriteCond %{REQUEST_FILENAME} -f [OR]
+RewriteCond %{REQUEST_FILENAME} -d
+RewriteRule ^ - [L]
+
+# Kalau user akses /about tanpa .html, arahkan ke about.html
+RewriteCond %{REQUEST_FILENAME}.html -f
+RewriteRule ^(.*)$ $1.html [L]
+
+# Kalau gak ada file-nya, baru arahkan ke index.html
+RewriteRule ^ index.html [L]
